@@ -1,0 +1,278 @@
+<!-- Golden Line Height Plugin by Markus Wilson (hi@mrk.us) -->
+
+<style>
+  /* Reset */
+  :root {
+    /* border-radius */
+    --border-radius-2: 2px;
+    --border-radius-6: 6px;
+    /* box-shadow */
+    --box-shadow: var(--box-shadow-menu);
+    --box-shadow-menu: 0 5px 17px rgba(0, 0, 0, 0.2),
+      0 2px 7px rgba(0, 0, 0, 0.15), inset 0 0 0 0.5px #000000,
+      0 0 0 0.5px rgba(0, 0, 0, 0.1);
+    --box-shadow-modal: 0 2px 14px rgba(0, 0, 0, 0.15),
+      0 0 0 0.5px rgba(0, 0, 0, 0.2);
+    /* font */
+    --font-family: 'Inter', 'Helvetica', sans-serif;
+    --font-family-code: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
+      'Courier New', monospace;
+    --font-size-11: 11px;
+    --font-size-12: 12px;
+    --font-weight-regular: 400;
+    --font-weight-bold: 600;
+    --line-height-16: 16px;
+    /* opacity */
+    --opacity-30: 0.3;
+    /* space */
+    --space-extra-small: 8px;
+    --space-small: 12px;
+    --space-medium: 16px;
+    --space-large: 20px;
+    --space-extra-large: 24px;
+    /* z-index */
+    --z-index-1: 1;
+    --z-index-2: 2;
+  }
+
+  * {
+    box-sizing: border-box;
+    border-width: 0;
+    border-style: solid;
+    border-color: currentColor;
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--figma-color-bg);
+    color: var(--figma-color-text);
+    font-family: var(--font-family);
+    font-size: var(--font-size-11);
+    font-weight: var(--font-weight-regular);
+    line-height: var(--line-height-16);
+  }
+
+  div,
+  span {
+    cursor: default;
+    user-select: none;
+  }
+
+  h1,
+  h2,
+  h3 {
+    margin: 0;
+    font-weight: inherit;
+  }
+
+  button {
+    padding: 0;
+    border: 0;
+    -webkit-appearance: none;
+    background-color: transparent;
+    font: inherit;
+    outline: 0;
+  }
+
+  hr {
+    border: 0;
+    margin: 0;
+  }
+
+  label {
+    display: block;
+  }
+
+  input,
+  textarea {
+    padding: 0;
+    border: 0;
+    margin: 0;
+    -webkit-appearance: none;
+    cursor: default;
+    font: inherit;
+    outline: 0;
+  }
+
+  svg {
+    display: block;
+  }
+
+  ::selection {
+    background-color: var(--figma-color-bg-onselected);
+  }
+
+  /* Layout */
+  .container {
+    display: flex;
+    height: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: space-between;
+    padding: var(--space-medium);
+    padding-top: calc(var(--space-medium) / 2);
+  }
+  .container .row {
+    flex: 100%;
+  }
+  .container .row:last-of-type {
+    align-self: flex-end;
+  }
+
+  /* Text */
+  .text {
+    padding-top: 1px;
+    color: var(--figma-color-text);
+    pointer-events: none;
+    transform: translateY(4px);
+  }
+  .text:before {
+    display: block;
+    height: 0;
+    margin-top: -9px;
+    content: '';
+    pointer-events: none;
+  }
+  .text-left {
+    text-align: left;
+  }
+
+  /* Button */
+  .button {
+    position: relative;
+    z-index: var(--z-index-1);
+    display: inline-block;
+  }
+
+  .full-width {
+    display: block;
+  }
+
+  .button button {
+    display: inline-block;
+    height: 32px;
+    border-radius: var(--border-radius-6);
+  }
+
+  .full-width button {
+    display: block;
+    overflow: hidden;
+    width: 100%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .default button {
+    padding: 0 14px;
+    border: 2px solid transparent;
+    background-color: var(--figma-color-bg-brand);
+    color: var(--figma-color-text-onbrand);
+    line-height: 28px;
+  }
+  .default button:focus {
+    box-shadow: 0 0 0 1px var(--figma-color-bg),
+      0 0 0 3px rgba(255, 255, 255, 0.2);
+  }
+
+  /* Toggle */
+  .toggle {
+    position: relative;
+    z-index: var(--z-index-1);
+    margin: 16px 0;
+  }
+  
+  .input {
+    position: absolute;
+    z-index: var(--z-index-1);
+    top: -8px;
+    right: -16px;
+    bottom: -8px;
+    left: -16px;
+    display: block;
+    width: calc(100% + 32px);
+  }
+
+  .toggle-bg {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 24px;
+    height: 12px;
+    border-radius: 6px;
+    background-color: var(--figma-color-bg-tertiary);
+    transition: background-color 0.1s ease-out, border-color 0.1s ease-out;
+  }
+  .toggle .input:focus ~ .toggle-bg {
+    box-shadow: 0 0 0 1px var(--figma-color-bg),
+      0 0 0 3px rgba(255, 255, 255, 0.2);
+  }
+  .toggle .input:checked ~ .toggle-bg {
+    background-color: var(--figma-color-bg-brand);
+  }
+
+  .toggle-handle {
+    position: absolute;
+    top: 1px;
+    width: 10px;
+    height: 10px;
+    border-radius: 6px;
+    background-color: #ffffff;
+    transition: left 0.1s ease-out;
+    /* box-shadow: 0 0 0 1px rgba(0,0,0,0.1); */
+  }
+  .input ~ .toggle-handle {
+    transition: border-color 0.1s ease-out;
+    /* box-shadow: 0 0 0 1px rgba(0,0,0,0.25); */
+  }
+  .input:not(:checked) ~ .toggle-handle {
+    right: 13px;
+  }
+  .input:checked ~ .toggle-handle {
+    right: 1px;
+    border-color: #ffffff;
+  }
+
+  .toggle-label {
+    padding: 2px 0 2px 0;
+    color: var(--figma-color-text);
+  }
+</style>
+
+<div class="container">
+  <!-- Plugin description -->
+  <div class="row">
+    <div class="text">
+      <p>Automatically determines the line height of selected text based on the Golden Ratio.</p>
+    </div> 
+    <div class="text">
+      <p>If you choose the "Fit to 8px grid" option, the line height will then be rounded to the nearest number that is divisible by 8 for a seamless integration into an 8px grid system.</p>
+    </div>
+  </div>
+
+  <!-- Plugin CTA's -->
+  <div class="row">
+    <label for="round-line-height" class="toggle">
+      <div class="toggle-label">
+        <div class="text text-left">
+          Fit to 8px grid
+        </div>
+      </div>
+      <input type="checkbox" id="round-line-height" tab-index="0" class="input">
+      <div class="toggle-bg"></div>
+      <div class="toggle-handle"></div>
+    </label>
+
+    <div class="button default full-width">
+      <button id="apply" tab-index="1">Apply Golden Line Height</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.getElementById('apply').onclick = () => {
+    const checkbox = document.getElementById('round-line-height');
+    const checked = checkbox.checked;
+    parent.postMessage({ pluginMessage: { type: 'apply-line-height', checked } }, '*')
+  }
+</script>
+
