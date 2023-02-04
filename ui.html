@@ -14,7 +14,7 @@
     --box-shadow-modal: 0 2px 14px rgba(0, 0, 0, 0.15),
       0 0 0 0.5px rgba(0, 0, 0, 0.2);
     /* font */
-    --font-family: 'Inter', 'Helvetica', sans-serif;
+    --font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Inter', 'Helvetica', 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     --font-family-code: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
       'Courier New', monospace;
     --font-size-11: 11px;
@@ -236,11 +236,16 @@
     padding: 2px 0 2px 0;
     color: var(--figma-color-text);
   }
+
+  /* Helpers */
+  .opacity-50 {
+    opacity: 0.5;
+  }
 </style>
 
 <div class="container">
   <!-- Plugin description -->
-  <div class="row">
+  <div class="row opacity-50">
     <div class="text">
       <p>Automatically determines the line height of selected text based on the Golden Ratio.</p>
     </div> 
