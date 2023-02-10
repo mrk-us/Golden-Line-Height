@@ -24,19 +24,29 @@ figma.ui.onmessage = msg => {
       
             // Get the current font size of the text layer
             const fontSize: number = node.fontSize as number;
+            // Get the current width of the text layer
+            const lineWidth: number = node.width as number;
       
-            // Round lineHeight to nearest number divisible by 8
-            let roundedLineHeight 
+            let goldenLineHeight 
+            // Calculate golden ratio based on line width
+            // from formula: (https://pearsonified.com/golden-ratio-typography-intro)
+            const goldenRatioFormula = 1.618 - 1/(2*1.618) * (1 - lineWidth / Math.pow((fontSize*1.618), 2))
             
-            if (msg.checked) {
-              roundedLineHeight = Math.round(fontSize * 1.618 / 8) * 8;
-            } else {
-              roundedLineHeight = fontSize * 1.618;
+            switch (true) {
+              case msg.fitToGridChecked:
+                // Calculate line height and round to the nearest number divisible by 8
+                goldenLineHeight = Math.round(fontSize * goldenRatioFormula / 8) * 8;
+                break;
+
+              default:
+                // Calculate line height
+                goldenLineHeight = roundToDecimal(fontSize * goldenRatioFormula, 1);
+                break;
             }
       
             // Set the line height of the text layer to the roundedLineHeight value
             node.lineHeight = {
-              value: roundedLineHeight,
+              value: goldenLineHeight,
               unit: "PIXELS"
             };
 
@@ -57,3 +67,9 @@ figma.ui.onmessage = msg => {
     })();
   }
 };
+
+// Round to chosen decimal place (Figma uses 1 decimal place)
+function roundToDecimal(value, precision) {
+  var multiplier = Math.pow(10, precision || 0);
+  return Math.round(value * multiplier) / multiplier;
+}

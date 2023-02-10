@@ -275,9 +275,10 @@
 
 <script>
   document.getElementById('apply').onclick = () => {
-    const checkbox = document.getElementById('round-line-height');
-    const checked = checkbox.checked;
-    parent.postMessage({ pluginMessage: { type: 'apply-line-height', checked } }, '*')
+    const fitToGridCheckbox = document.getElementById('round-line-height');
+    const fitToGridChecked = fitToGridCheckbox.checked;
+    parent.postMessage({ pluginMessage: { type: 'apply-line-height', fitToGridChecked } }, '*')
+  
   }
 </script>
 
