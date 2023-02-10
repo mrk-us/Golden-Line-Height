@@ -1,4 +1,8 @@
-### A Figma plugin that automatically determines the line height based on the Golden Ratio, with an option to round to the nearest number divisible by 8 for a seamless integration into an 8px grid system.
+## Description
+
+A Figma plugin that automatically determines the line height of one or more text layers using the Golden Ratio, with an option to round to the nearest number divisible by 8 for integration into an 8pt grid. 
+
+The plugin takes into consideration both the font size and line width to determine the ideal line height.
 
 Made by Markus Wilson (hi@mrk.us)
 
