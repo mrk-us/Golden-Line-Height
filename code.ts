@@ -69,7 +69,7 @@ figma.ui.onmessage = msg => {
 };
 
 // Round to chosen decimal place (Figma uses 1 decimal place)
-function roundToDecimal(value, precision) {
+function roundToDecimal(value: number, precision: number) {
   var multiplier = Math.pow(10, precision || 0);
   return Math.round(value * multiplier) / multiplier;
 }
