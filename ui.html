@@ -4,26 +4,21 @@
   /* Reset */
   :root {
     /* border-radius */
-    --border-radius-2: 2px;
-    --border-radius-6: 6px;
-    /* box-shadow */
-    --box-shadow: var(--box-shadow-menu);
-    --box-shadow-menu: 0 5px 17px rgba(0, 0, 0, 0.2),
-      0 2px 7px rgba(0, 0, 0, 0.15), inset 0 0 0 0.5px #000000,
-      0 0 0 0.5px rgba(0, 0, 0, 0.1);
-    --box-shadow-modal: 0 2px 14px rgba(0, 0, 0, 0.15),
-      0 0 0 0.5px rgba(0, 0, 0, 0.2);
+    --border-radius: 8px;
     /* font */
-    --font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Inter', 'Helvetica', 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    --font-family-code: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono',
-      'Courier New', monospace;
-    --font-size-11: 11px;
-    --font-size-12: 12px;
+    --font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter",
+      "Helvetica", "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
+      "Helvetica Neue", sans-serif;
+    --font-family-code: SFMono-Regular, Menlo, Monaco, Consolas,
+      "Liberation Mono", "Courier New", monospace;
+    --font-size-xs: 11px;
+    --font-size-sm: 12px;
+    --font-size-md: 16px;
+    --font-size-lg: 20px;
+    --font-size-xl: 24px;
     --font-weight-regular: 400;
     --font-weight-bold: 600;
     --line-height-16: 16px;
-    /* opacity */
-    --opacity-30: 0.3;
     /* space */
     --space-extra-small: 8px;
     --space-small: 12px;
@@ -33,6 +28,18 @@
     /* z-index */
     --z-index-1: 1;
     --z-index-2: 2;
+    /* Colors */
+    --brand-color: rgb(239, 129, 0);
+    --brand-color-gradient: linear-gradient(
+      45deg,
+      rgba(239, 129, 0, 1) 0%,
+      rgba(255, 163, 26, 1) 100%
+    );
+    --brand-color-gradient-hover: linear-gradient(
+      45deg,
+      rgb(243, 133, 6) 0%,
+      rgb(254, 168, 39) 100%
+    );
   }
 
   * {
@@ -47,7 +54,7 @@
     background-color: var(--figma-color-bg);
     color: var(--figma-color-text);
     font-family: var(--font-family);
-    font-size: var(--font-size-11);
+    font-size: var(--font-size-xs);
     font-weight: var(--font-weight-regular);
     line-height: var(--line-height-16);
   }
@@ -130,7 +137,7 @@
     display: block;
     height: 0;
     margin-top: -9px;
-    content: '';
+    content: "";
     pointer-events: none;
   }
   .text-left {
@@ -151,7 +158,7 @@
   .button button {
     display: inline-block;
     height: 32px;
-    border-radius: var(--border-radius-6);
+    border-radius: var(--border-radius);
   }
 
   .full-width button {
@@ -165,9 +172,12 @@
   .default button {
     padding: 0 14px;
     border: 2px solid transparent;
-    background-color: var(--figma-color-bg-brand);
-    color: var(--figma-color-text-onbrand);
+    background: var(--brand-color);
+    background: var(--brand-color-gradient);
+    color: var(--figma-color-bg);
     line-height: 28px;
+    font-weight: 600;
+    transition: 0.2s;
   }
   .default button:focus {
     box-shadow: 0 0 0 1px var(--figma-color-bg),
@@ -180,7 +190,7 @@
     z-index: var(--z-index-1);
     margin: 16px 0;
   }
-  
+
   .input {
     position: absolute;
     z-index: var(--z-index-1);
@@ -207,7 +217,7 @@
       0 0 0 3px rgba(255, 255, 255, 0.2);
   }
   .toggle .input:checked ~ .toggle-bg {
-    background-color: var(--figma-color-bg-brand);
+    background-color: var(--brand-color);
   }
 
   .toggle-handle {
@@ -247,38 +257,64 @@
   <!-- Plugin description -->
   <div class="row opacity-50">
     <div class="text">
-      <p>Automatically determines the line height of selected text using the Golden Ratio.</p>
-    </div> 
+      <p>
+        Automatically determines the line height of selected text using the
+        Golden Ratio.
+      </p>
+    </div>
     <div class="text">
-      <p>If you choose the "Fit to 8pt grid" option, the line height will then be rounded to the nearest number that is divisible by 8 for integration into an 8pt grid system.</p>
+      <p>
+        If you choose the "Fit to 8pt grid" option, the line height will then be
+        rounded to the nearest number that is divisible by 8 for integration
+        into an 8pt grid system.
+      </p>
     </div>
   </div>
 
   <!-- Plugin CTA's -->
   <div class="row">
+    <label for="ignore-line-width" class="toggle">
+      <div class="toggle-label">
+        <div class="text text-left">Ignore line width</div>
+      </div>
+      <input
+        type="checkbox"
+        id="ignore-line-width"
+        tab-index="0"
+        class="input"
+      />
+      <div class="toggle-bg"></div>
+      <div class="toggle-handle"></div>
+    </label>
+    
     <label for="round-line-height" class="toggle">
       <div class="toggle-label">
-        <div class="text text-left">
-          Fit to 8pt grid
-        </div>
+        <div class="text text-left">Fit to 8pt grid</div>
       </div>
-      <input type="checkbox" id="round-line-height" tab-index="0" class="input">
+      <input
+        type="checkbox"
+        id="round-line-height"
+        tab-index="1"
+        class="input"
+      />
       <div class="toggle-bg"></div>
       <div class="toggle-handle"></div>
     </label>
 
     <div class="button default full-width">
-      <button id="apply" tab-index="1">Apply Golden Line Height</button>
+      <button id="apply" tab-index="2">Apply Golden Line Height</button>
     </div>
   </div>
 </div>
 
 <script>
-  document.getElementById('apply').onclick = () => {
-    const fitToGridCheckbox = document.getElementById('round-line-height');
-    const fitToGridChecked = fitToGridCheckbox.checked;
-    parent.postMessage({ pluginMessage: { type: 'apply-line-height', fitToGridChecked } }, '*')
-  
-  }
+  document.getElementById("apply").onclick = () => {
+    const fitToGridCheckbox = document.getElementById("round-line-height")
+    const fitToGridChecked = fitToGridCheckbox.checked
+    const ignoreLineWidthCheckbox = document.getElementById("ignore-line-width")
+    const ignoreLineWidthChecked = ignoreLineWidthCheckbox.checked
+    parent.postMessage({ 
+      pluginMessage: { type: "apply-line-height", fitToGridChecked, ignoreLineWidthChecked } 
+    }, "*")
+  };
 </script>
-
