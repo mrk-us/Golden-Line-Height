@@ -1,5 +1,7 @@
 ## Description
 
+![Golden Line Height Cover Image](https://s3-alpha-sig.figma.com/plugins/1203442582691456980/47654/94334941/03b859dc-6da8-4d11-a324-a73437e99f15-cover?Expires=1676851200&Signature=ieaSpEPClMhp2R0qah59K~Qw8PergKvZ3LUe0vSv20DCnD7~64JmDmCRRr3F-a5mm3Yj94xo77J5oXezhBPvg0bD17iw3~v6iz33UJVtkXTZSuDIWNG-fVbnNtPR~z4hNN6XB~FZJzGDqg-LzZeQK5uzK-cXpso0mmMaPyv7clRpRbctDhhANXQTFLPqzSsuCg4BXdudwimkTOUGokBoOEVX9NmkRh6MmgYxxCS9554bEZWgPrAVjAEDiChBUa-0zNBKQfLAQmcxBcxTOOGeO5jLSbyHsEWjARvUuzNxNMsphDf0mrdoaz9Z8bAP6VHAEda3e4g9zR~x1~wkzjcn3Q__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4 'Cover Image')
+
 A Figma plugin that automatically determines the line height of one or more text layers using the Golden Ratio, with an option to round to the nearest number divisible by 8 for integration into an 8pt grid.
 
 The plugin takes into consideration both the font size and line width to determine the ideal line height.
