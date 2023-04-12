@@ -1,320 +1,293 @@
 <!-- Golden Line Height Plugin by Markus Wilson (hi@mrk.us) -->
 
 <style>
-  /* Reset */
-  :root {
-    /* border-radius */
-    --border-radius: 8px;
-    /* font */
-    --font-family: system-ui, -apple-system, BlinkMacSystemFont, "Inter",
-      "Helvetica", "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans",
-      "Helvetica Neue", sans-serif;
-    --font-family-code: SFMono-Regular, Menlo, Monaco, Consolas,
-      "Liberation Mono", "Courier New", monospace;
-    --font-size-xs: 11px;
-    --font-size-sm: 12px;
-    --font-size-md: 16px;
-    --font-size-lg: 20px;
-    --font-size-xl: 24px;
-    --font-weight-regular: 400;
-    --font-weight-bold: 600;
-    --line-height-16: 16px;
-    /* space */
-    --space-extra-small: 8px;
-    --space-small: 12px;
-    --space-medium: 16px;
-    --space-large: 20px;
-    --space-extra-large: 24px;
-    /* z-index */
-    --z-index-1: 1;
-    --z-index-2: 2;
-    /* Colors */
-    --brand-color: rgb(239, 129, 0);
-    --brand-color-gradient: linear-gradient(
-      45deg,
-      rgba(239, 129, 0, 1) 0%,
-      rgba(255, 163, 26, 1) 100%
-    );
-    --brand-color-gradient-hover: linear-gradient(
-      45deg,
-      rgb(243, 133, 6) 0%,
-      rgb(254, 168, 39) 100%
-    );
-  }
+	/* Reset */
+	* {
+		box-sizing: border-box;
+		border-width: 0;
+		border-style: solid;
+		border-color: currentColor;
+	}
 
-  * {
-    box-sizing: border-box;
-    border-width: 0;
-    border-style: solid;
-    border-color: currentColor;
-  }
+	body {
+		margin: 0;
+	}
 
-  body {
-    margin: 0;
-    background-color: var(--figma-color-bg);
-    color: var(--figma-color-text);
-    font-family: var(--font-family);
-    font-size: var(--font-size-xs);
-    font-weight: var(--font-weight-regular);
-    line-height: var(--line-height-16);
-  }
+	div,
+	span {
+		cursor: default;
+		user-select: none;
+	}
 
-  div,
-  span {
-    cursor: default;
-    user-select: none;
-  }
+	h1,
+	h2,
+	h3 {
+		margin: 0;
+		font-weight: inherit;
+	}
 
-  h1,
-  h2,
-  h3 {
-    margin: 0;
-    font-weight: inherit;
-  }
+	button {
+		padding: 0;
+		border: 0;
+		-webkit-appearance: none;
+		background-color: transparent;
+		font: inherit;
+		outline: 0;
+	}
 
-  button {
-    padding: 0;
-    border: 0;
-    -webkit-appearance: none;
-    background-color: transparent;
-    font: inherit;
-    outline: 0;
-  }
+	hr {
+		border: 0;
+		margin: 0;
+	}
 
-  hr {
-    border: 0;
-    margin: 0;
-  }
+	label {
+		display: block;
+	}
 
-  label {
-    display: block;
-  }
+	input,
+	textarea {
+		padding: 0;
+		border: 0;
+		margin: 0;
+		-webkit-appearance: none;
+		cursor: default;
+		font: inherit;
+		outline: 0;
+	}
 
-  input,
-  textarea {
-    padding: 0;
-    border: 0;
-    margin: 0;
-    -webkit-appearance: none;
-    cursor: default;
-    font: inherit;
-    outline: 0;
-  }
+	svg {
+		display: block;
+	}
 
-  svg {
-    display: block;
-  }
+	/* Variables */
+	:root {
+		/* font */
+		--font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Inter', 'Helvetica', 'Segoe UI', Roboto, Oxygen,
+			Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+		--font-family-code: SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+		--font-size-sm: 12px;
+		--font-size-base: 13px;
+		--font-weight-regular: 300;
+		--font-weight-medium: 400;
+		--font-weight-bold: 600;
+		--line-height-xs: 12px;
+		--line-height-sm: 16px;
+		--line-height-base: 24px;
+		/* space */
+		--space-xs: 4px;
+		--space-sm: 8px;
+		--space-base: 12px;
+		--space-md: 16px;
+		--space-lg: 24px;
+		--space-xl: 32px;
+		/* Border */
+		--border-radius-xs: 4px;
+		--border-radius-sm: 8px;
+		--border-radius-base: 12px;
+		--border-radius-md: 14px;
+		--border-radius-lg: 16px;
+		/* z-index */
+		--z-index-1: 1;
+		--z-index-2: 2;
+		/* Colors */
+		--color-brand: #ffad4c;
+		--color-bg: #2c2c2c;
+		--color-gray-light: rgba(255, 255, 255, 0.15);
+		--color-gray: rgba(255, 255, 255, 0.4);
+		--color-white: #ffffff;
+	}
 
-  ::selection {
-    background-color: var(--figma-color-bg-onselected);
-  }
+	body {
+		background-color: var(--color-bg);
+		color: var(--color-gray);
+		font-family: var(--font-family);
+		font-size: var(--font-size-base);
+		font-weight: var(--font-weight-regular);
+		line-height: var(--line-height-base);
+	}
 
-  /* Layout */
-  .container {
-    display: flex;
-    height: 100%;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-content: space-between;
-    padding: var(--space-medium);
-    padding-top: calc(var(--space-medium) / 2);
-  }
-  .container .row {
-    flex: 100%;
-  }
-  .container .row:last-of-type {
-    align-self: flex-end;
-  }
+	/* Layout */
+	.container {
+		display: flex;
+		height: 100%;
+		flex-direction: row;
+		align-content: space-between;
+		padding: var(--space-md);
+		gap: var(--space-lg);
+	}
 
-  /* Text */
-  .text {
-    padding-top: 1px;
-    color: var(--figma-color-text);
-    pointer-events: none;
-    transform: translateY(4px);
-  }
-  .text:before {
-    display: block;
-    height: 0;
-    margin-top: -9px;
-    content: "";
-    pointer-events: none;
-  }
-  .text-left {
-    text-align: left;
-  }
+	.col {
+		position: relative;
+	}
 
-  /* Button */
-  .button {
-    position: relative;
-    z-index: var(--z-index-1);
-    display: inline-block;
-  }
+	.col:last-of-type {
+		width: 72px;
+	}
 
-  .full-width {
-    display: block;
-  }
+	/* Button */
+	.button {
+		position: relative;
+		z-index: var(--z-index-1);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		height: 40px;
+		border-radius: var(--border-radius-base);
+		font-weight: var(--font-weight-bold);
+		font-size: var(--font-size-base);
+		line-height: var(--line-height-sm);
+		cursor: pointer;
+	}
 
-  .button button {
-    display: inline-block;
-    height: 32px;
-    border-radius: var(--border-radius);
-  }
+	.button svg {
+		margin-top: -1px;
+	}
 
-  .full-width button {
-    display: block;
-    overflow: hidden;
-    width: 100%;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
+	.button:active {
+		transform: scale(0.96);
+	}
 
-  .default button {
-    padding: 0 14px;
-    border: 2px solid transparent;
-    background: var(--brand-color);
-    background: var(--brand-color-gradient);
-    color: var(--figma-color-bg);
-    line-height: 28px;
-    font-weight: 600;
-    transition: 0.2s;
-  }
-  .default button:focus {
-    box-shadow: 0 0 0 1px var(--figma-color-bg),
-      0 0 0 3px rgba(255, 255, 255, 0.2);
-  }
+	.primary {
+		padding: 0 var(--space-sm);
+		background: var(--color-brand);
+		color: var(--color-white);
+		transition: 0.2s;
+	}
+	.primary:focus {
+		border: 2px solid #ffddb4;
+	}
 
-  /* Toggle */
-  .toggle {
-    position: relative;
-    z-index: var(--z-index-1);
-    margin: 16px 0;
-  }
+	/* Toggle */
+	label {
+		position: relative;
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		gap: var(--space-base);
+		height: 100%;
+	}
 
-  .input {
-    position: absolute;
-    z-index: var(--z-index-1);
-    top: -8px;
-    right: -16px;
-    bottom: -8px;
-    left: -16px;
-    display: block;
-    width: calc(100% + 32px);
-  }
+	.toggle-label {
+		width: 100%;
+		flex-grow: 1;
+		font-weight: var(--font-weight-medium);
+		font-size: var(--font-size-sm);
+		color: var(--color-white);
+	}
 
-  .toggle-bg {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 24px;
-    height: 12px;
-    border-radius: 6px;
-    background-color: var(--figma-color-bg-tertiary);
-    transition: background-color 0.1s ease-out, border-color 0.1s ease-out;
-  }
-  .toggle .input:focus ~ .toggle-bg {
-    box-shadow: 0 0 0 1px var(--figma-color-bg),
-      0 0 0 3px rgba(255, 255, 255, 0.2);
-  }
-  .toggle .input:checked ~ .toggle-bg {
-    background-color: var(--brand-color);
-  }
+	.toggle {
+		position: relative;
+		flex-grow: 0;
+	}
 
-  .toggle-handle {
-    position: absolute;
-    top: 1px;
-    width: 10px;
-    height: 10px;
-    border-radius: 6px;
-    background-color: #ffffff;
-    transition: left 0.1s ease-out;
-    /* box-shadow: 0 0 0 1px rgba(0,0,0,0.1); */
-  }
-  .input ~ .toggle-handle {
-    transition: border-color 0.1s ease-out;
-    /* box-shadow: 0 0 0 1px rgba(0,0,0,0.25); */
-  }
-  .input:not(:checked) ~ .toggle-handle {
-    right: 13px;
-  }
-  .input:checked ~ .toggle-handle {
-    right: 1px;
-    border-color: #ffffff;
-  }
+	input[type='checkbox'] {
+		position: relative;
+		z-index: var(--z-index-2);
+		display: block;
+		width: 32px;
+		height: 24px;
+	}
 
-  .toggle-label {
-    padding: 2px 0 2px 0;
-    color: var(--figma-color-text);
-  }
+	.toggle-bg {
+		position: absolute;
+		top: 0;
+		right: 0;
+		width: 32px;
+		height: 24px;
+		border-radius: var(--border-radius-base);
+		border: 2px solid var(--color-gray-light);
+		transition: background-color 0.1s ease-out, border-color 0.1s ease-out;
+	}
+	.toggle .input:focus ~ .toggle-bg {
+		box-shadow: 0 0 0 1px #ffddb4, 0 0 0 3px rgba(255, 255, 255, 0.2);
+	}
+	.toggle .input:checked ~ .toggle-bg {
+		background-color: var(--color-brand);
+	}
 
-  /* Helpers */
-  .opacity-50 {
-    opacity: 0.5;
-  }
+	.toggle-handle {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		right: 12px;
+		margin: auto;
+		width: 16px;
+		height: 16px;
+		border-radius: var(--border-radius-base);
+		background-color: var(--color-gray);
+		transition: right 0.1s ease-out;
+	}
+	input[type='checkbox'] ~ .toggle-handle {
+		transition: background-color 0.1s ease-out;
+	}
+	input[type='checkbox']:not(:checked) ~ .toggle-handle {
+		right: 12px;
+	}
+	input[type='checkbox']:checked ~ .toggle-handle {
+		right: 4px;
+		background-color: var(--color-brand);
+	}
 </style>
 
 <div class="container">
-  <!-- Plugin description -->
-  <div class="row opacity-50">
-    <div class="text">
-      <p>
-        Automatically determines the line height of selected text using the
-        Golden Ratio.
-      </p>
-    </div>
-    <div class="text">
-      <p>
-        If you choose the "Fit to 8pt grid" option, the line height will then be
-        rounded to the nearest number that is divisible by 8 for integration
-        into an 8pt grid system.
-      </p>
-    </div>
-  </div>
+	<div class="col">
+		<label for="ignore-line-width">
+			<div class="toggle-label">Ignore line width</div>
+			<div class="toggle">
+				<input type="checkbox" id="ignore-line-width" tab-index="0" />
+				<div class="toggle-bg"></div>
+				<div class="toggle-handle"></div>
+			</div>
+		</label>
+	</div>
 
-  <!-- Plugin CTA's -->
-  <div class="row">
-    <label for="ignore-line-width" class="toggle">
-      <div class="toggle-label">
-        <div class="text text-left">Ignore line width</div>
-      </div>
-      <input
-        type="checkbox"
-        id="ignore-line-width"
-        tab-index="0"
-        class="input"
-      />
-      <div class="toggle-bg"></div>
-      <div class="toggle-handle"></div>
-    </label>
-    
-    <label for="round-line-height" class="toggle">
-      <div class="toggle-label">
-        <div class="text text-left">Fit to 8pt grid</div>
-      </div>
-      <input
-        type="checkbox"
-        id="round-line-height"
-        tab-index="1"
-        class="input"
-      />
-      <div class="toggle-bg"></div>
-      <div class="toggle-handle"></div>
-    </label>
+	<div class="col">
+		<label for="round-line-height">
+			<div class="toggle-label">Fit to 8pt grid</div>
+			<div class="toggle">
+				<input type="checkbox" id="round-line-height" tab-index="1" />
+				<div class="toggle-bg"></div>
+				<div class="toggle-handle"></div>
+			</div>
+		</label>
+	</div>
 
-    <div class="button default full-width">
-      <button id="apply" tab-index="2">Apply Golden Line Height</button>
-    </div>
-  </div>
+	<div class="col">
+		<button id="run" class="button primary" tab-index="2">
+			<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path
+					d="M4.71744 13.4393C4.76389 13.3031 4.95657 13.3031 5.00302 13.4393L5.35799 14.4804C5.54117 15.0176 5.95661 15.4438 6.48903 15.6406L7.49477 16.0124C7.62618 16.061 7.62618 16.2468 7.49477 16.2954L6.48903 16.6672C5.95661 16.864 5.54117 17.2902 5.35799 17.8274L5.00302 18.8685C4.95657 19.0047 4.76389 19.0047 4.71744 18.8685L4.36247 17.8274C4.17929 17.2902 3.76385 16.864 3.23143 16.6672L2.22569 16.2954C2.09428 16.2468 2.09428 16.061 2.22569 16.0124L3.23143 15.6406C3.76385 15.4438 4.17929 15.0176 4.36247 14.4804L4.71744 13.4393Z"
+					fill="#2C2C2C"
+				/>
+				<path
+					d="M10.6599 12.2801L8.21994 9.84006L10.3399 7.72006L12.7799 10.1601L10.6599 12.2801ZM9.62994 6.79006L7.28994 9.13006C6.89994 9.50006 6.89994 10.1501 7.28994 10.5401L18.9599 22.2101C19.3499 22.6001 19.9999 22.6001 20.3699 22.2101L22.7099 19.8701C23.0999 19.5001 23.0999 18.8501 22.7099 18.4601L11.0399 6.79006C10.6499 6.40006 9.99994 6.40006 9.62994 6.79006Z"
+					fill="#2C2C2C"
+				/>
+				<path
+					d="M4.71744 1.57163C4.76389 1.43539 4.95657 1.43539 5.00302 1.57163L5.35799 2.61268C5.54117 3.14993 5.95661 3.5761 6.48903 3.77292L7.49477 4.14471C7.62618 4.19329 7.62618 4.37915 7.49477 4.42772L6.48903 4.79952C5.95661 4.99633 5.54117 5.4225 5.35799 5.95976L5.00302 7.00081C4.95657 7.13705 4.76389 7.13705 4.71744 7.00081L4.36247 5.95976C4.17929 5.4225 3.76385 4.99633 3.23143 4.79952L2.22569 4.42772C2.09428 4.37915 2.09428 4.19329 2.22569 4.14471L3.23143 3.77292C3.76385 3.5761 4.17929 3.14993 4.36247 2.61268L4.71744 1.57163Z"
+					fill="#2C2C2C"
+				/>
+				<path
+					d="M16.3584 1.57163C16.4049 1.43539 16.5976 1.43539 16.644 1.57163L16.999 2.61268C17.1822 3.14993 17.5976 3.5761 18.13 3.77292L19.1358 4.14471C19.2672 4.19329 19.2672 4.37915 19.1358 4.42772L18.13 4.79952C17.5976 4.99633 17.1822 5.4225 16.999 5.95976L16.644 7.00081C16.5976 7.13705 16.4049 7.13705 16.3584 7.00081L16.0035 5.95976C15.8203 5.4225 15.4048 4.99633 14.8724 4.79952L13.8667 4.42772C13.7353 4.37915 13.7353 4.19329 13.8667 4.14471L14.8724 3.77292C15.4048 3.5761 15.8203 3.14993 16.0035 2.61268L16.3584 1.57163Z"
+					fill="#2C2C2C"
+				/>
+			</svg>
+		</button>
+	</div>
 </div>
 
 <script>
-  document.getElementById("apply").onclick = () => {
-    const fitToGridCheckbox = document.getElementById("round-line-height")
-    const fitToGridChecked = fitToGridCheckbox.checked
-    const ignoreLineWidthCheckbox = document.getElementById("ignore-line-width")
-    const ignoreLineWidthChecked = ignoreLineWidthCheckbox.checked
-    parent.postMessage({ 
-      pluginMessage: { type: "apply-line-height", fitToGridChecked, ignoreLineWidthChecked } 
-    }, "*")
-  };
+	document.getElementById('run').onclick = () => {
+		const fitToGridCheckbox = document.getElementById('round-line-height')
+		const fitToGridChecked = fitToGridCheckbox.checked
+		const ignoreLineWidthCheckbox = document.getElementById('ignore-line-width')
+		const ignoreLineWidthChecked = ignoreLineWidthCheckbox.checked
+		parent.postMessage(
+			{
+				pluginMessage: { type: 'apply-line-height', fitToGridChecked, ignoreLineWidthChecked },
+			},
+			'*'
+		)
+	}
 </script>

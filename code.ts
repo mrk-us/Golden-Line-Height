@@ -1,10 +1,9 @@
 // Golden Line Height Plugin by Markus Wilson (hi@mrk.us)
 
-// Show the HTML page in "ui.html".
 figma.showUI(__html__, {
 	themeColors: true,
-	width: 260,
-	height: 280 /* other options */,
+	width: 412,
+	height: 72,
 })
 
 figma.ui.onmessage = msg => {
